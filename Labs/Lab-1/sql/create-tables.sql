@@ -14,11 +14,11 @@ create table if not exists city
 
 create table if not exists events
 (
-    id           serial primary key,
+    id          serial primary key,
     description text    not null,
-    person_id    integer
+    person_id   integer
         references person (id),
-    city_id      integer not null
+    city_id     integer not null
         references city (id)
 );
 
@@ -32,9 +32,36 @@ create table if not exists atmosphere
 
 create table if not exists building
 (
-    id      serial primary key ,
+    id      serial primary key,
     type    varchar(50) not null,
-    address  varchar(50) not null UNIQUE,
+    address varchar(50) not null UNIQUE,
     city_id integer
         references city (id)
+);
+
+create table if not exists type_obj_build
+(
+    id   serial primary key,
+    type varchar(50) not null unique
+);
+
+create table if not exists object_build
+(
+    id                serial primary key,
+    model             varchar(50),
+    description       text,
+    type_obj_build_id int not null
+        references type_obj_build (id),
+    building_id       int
+        references building (id)
+);
+
+create table if not exists interactions
+(
+    id              serial primary key,
+    description     text,
+    person_id       int not null
+        references person (id),
+    object_build_id int not null
+        references object_build (id)
 );

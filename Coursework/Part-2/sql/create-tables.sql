@@ -63,6 +63,84 @@ create table if not exists pos
         references studio (id)
 );
 
+create table if not exists class
+(
+    id         serial      not null primary key,
+    name       varchar(32) not null,
+    start_time date        not null,
+    end_time   date        not null,
+    amount     float       not null,
+    pos_id     int         not null
+        references pos (id)
+);
+
+create table if not exists booking
+(
+    id        serial not null primary key,
+    client_id int    not null
+        references client (id),
+    class_id  int    not null
+        references class (id)
+);
+
+create table if not exists instructor
+(
+    id     serial      not null primary key,
+    name   varchar(50) not null,
+    mail   varchar(50) not null,
+    phone  varchar(20) not null,
+    gender varchar(20) not null
+);
+
+create table if not exists instructor_class_relation
+(
+    id            serial not null primary key,
+    instructor_id int    not null
+        references instructor (id),
+    class_id      int    not null
+        references class (id)
+);
+
+create table if not exists classifier_type
+(
+    id   serial      not null primary key,
+    name varchar(32) not null
+);
+
+create table if not exists classifier
+(
+    id                 serial      not null primary key,
+    classifier_type_id int         not null
+        references classifier_type (id),
+    classifier_value   varchar(32) not null
+);
+
+create table if not exists class_classifier_relation
+(
+    id            serial not null primary key,
+    class_id      int    not null
+        references class (id),
+    classifier_id int    not null
+        references classifier (id)
+);
+
+create table if not exists instructor_classifier_relation
+(
+    id            serial not null primary key,
+    instructor_id int    not null
+        references instructor (id),
+    classifier_id int    not null
+        references classifier (id)
+);
+
+create table if not exists pos_classifier_relation
+(
+    id            serial not null primary key,
+    pos_id        int    not null
+        references pos (id),
+    classifier_id int    not null
+        references classifier (id)
+);
 
 
 

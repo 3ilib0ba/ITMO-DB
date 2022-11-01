@@ -77,27 +77,49 @@ HAVING AVG(date_part('year', age(PEOP."ДАТА_РОЖДЕНИЯ"))) <
 -- результат данного подзапроса по поиску максимального возраста в группе 1101 = 38
 
 
-
-
-
 -- Задание №6
 -- Получить список студентов, зачисленных до первого сентября 2012 года на первый курс заочной формы обучения (специальность: Программная инженерия). В результат включить:
 -- номер группы;
 -- номер, фамилию, имя и отчество студента;
 -- номер и состояние пункта приказа;
-SELECT * FROM "Н_НАПР_СПЕЦ";
-
-SELECT sp_type."НАИМЕНОВАНИЕ", "УЧЕБНЫЙ_ГОД", "КУРС", st."ГРУППА", peop."ФАМИЛИЯ", peop."ИМЯ", peop."ОТЧЕСТВО"
+SELECT sp_type."НАИМЕНОВАНИЕ",
+       "УЧЕБНЫЙ_ГОД",
+       st."ГРУППА",
+       peop."ФАМИЛИЯ",
+       peop."ИМЯ",
+       peop."ОТЧЕСТВО",
+       st."НАЧАЛО",
+       st."КОНЕЦ"
 FROM "Н_НАПРАВЛЕНИЯ_СПЕЦИАЛ" as sp
-INNER JOIN "Н_НАПР_СПЕЦ" sp_type on sp."НС_ИД" = sp_type."ИД"
-INNER JOIN "Н_ПЛАНЫ" as plans on plans."НАПС_ИД" = sp."ИД"
-INNER JOIN "Н_УЧЕНИКИ" as st on plans."ИД" = st."ПЛАН_ИД"
-INNER JOIN "Н_ЛЮДИ" as peop on peop."ИД" = st."ЧЛВК_ИД"
-WHERE sp_type."ИД" = 741            -- Направление программной инженерии
-AND plans."КУРС" = 1                -- Курс зачисления
-
-; --
+         INNER JOIN "Н_НАПР_СПЕЦ" sp_type on sp."НС_ИД" = sp_type."ИД"
+         INNER JOIN "Н_ПЛАНЫ" as plans on plans."НАПС_ИД" = sp."ИД"
+         INNER JOIN "Н_УЧЕНИКИ" as st on plans."ИД" = st."ПЛАН_ИД"
+         INNER JOIN "Н_ЛЮДИ" as peop on peop."ИД" = st."ЧЛВК_ИД"
+WHERE sp_type."ИД" = 741 -- Направление программной инженерии
+  AND plans."КУРС" = 1   -- Курс зачисления
+  AND st."НАЧАЛО" < '2012-09-01';
 
 
 -- Задание №7
 -- Сформировать запрос для получения числа на ФКТИУ троечников.
+select count(*)
+from (select peop."ИД", count(*)
+      from "Н_ВЕДОМОСТИ" as ved
+               INNER JOIN "Н_ЛЮДИ" as peop on ved."ЧЛВК_ИД" = peop."ИД"
+               INNER JOIN "Н_УЧЕНИКИ" as st on st."ЧЛВК_ИД" = peop."ИД"
+               INNER JOIN "Н_ПЛАНЫ" as plans on plans."ИД" = st."ПЛАН_ИД"
+               INNER JOIN "Н_НАПРАВЛЕНИЯ_СПЕЦИАЛ" as sp on sp."ИД" = plans."НАПС_ИД"
+               INNER JOIN "Н_НАПР_СПЕЦ" as sp_type on sp."НС_ИД" = sp_type."ИД"
+      where ved."ОЦЕНКА" = '3'
+        and sp_type."ИД" IN (741, 772, 317, 316, 16)
+      GROUP BY peop."ИД") as Иc;
+
+select peop."ИД", count(*) as number_of_3
+from "Н_ВЕДОМОСТИ" as ved
+         INNER JOIN "Н_ЛЮДИ" as peop on ved."ЧЛВК_ИД" = peop."ИД"
+         INNER JOIN "Н_УЧЕНИКИ" as st on st."ЧЛВК_ИД" = peop."ИД"
+         INNER JOIN "Н_ПЛАНЫ" as plans on plans."ИД" = st."ПЛАН_ИД"
+         INNER JOIN "Н_НАПРАВЛЕНИЯ_СПЕЦИАЛ" as sp on sp."ИД" = plans."НАПС_ИД"
+         INNER JOIN "Н_НАПР_СПЕЦ" as sp_type on sp."НС_ИД" = sp_type."ИД"
+where ved."ОЦЕНКА" = '3'
+group by peop."ИД";

@@ -6,11 +6,12 @@ create table if not exists role
 
 create table if not exists balance
 (
-    id              serial primary key,
-    value           float,
-    role_id         int not null
+    id        serial primary key,
+    value     float
+        CHECK (value >= 0),
+    role_id   int not null
         references role (id),
-    entity_id       int unique
+    entity_id int unique -- целостность отводится на программиста нужно чтобы здесь был id студии, клиента или инструктора
 );
 
 create table if not exists client
@@ -29,10 +30,10 @@ create table if not exists client
 create table if not exists legal_info
 (
     id               serial primary key,
-    full_description text,
+    full_description text   not null,
     contact_phone    varchar(20),
     mail             varchar(50) not null,
-    TIN              varchar(20) not null
+    TIN              varchar(20) not null unique
 );
 
 create table if not exists studio
@@ -64,7 +65,8 @@ create table if not exists class
     date_of    date        not null,
     start_time time        not null,
     end_time   time        not null,
-    amount     float       not null,
+    amount     float       not null
+        CHECK ( amount >= 0 ),
     pos_id     int         not null
         references pos (id)
 );
@@ -98,9 +100,9 @@ create table if not exists instructor_class_relation
 
 create table if not exists classifier
 (
-    id                 serial      not null primary key,
-    classifier_value   varchar(32) not null,
-    classifier_name    text        not null
+    id               serial      not null primary key,
+    classifier_value varchar(32) not null,
+    classifier_name  text        not null
 );
 
 create table if not exists class_classifier_relation

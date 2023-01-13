@@ -22,36 +22,36 @@ values (DEFAULT, 'ООО "ФИТЕНС СИЛА И ЗДОРОВЬЕ"', '+7922987
 
 -- создание балансов для клиентов
 insert into balance
-values (1, 1000, 2, 1);
+values (1, 1000, 2);
 insert into balance
-values (2, 1500, 2, 2);
+values (2, 1500, 2);
 insert into balance
-values (3, 4000, 2, 3);
+values (3, 4000, 2);
 insert into balance
-values (4, 12000, 2, 4);
+values (4, 12000, 2);
 insert into balance
-values (5, 100, 3, 5);
+values (5, 100, 3);
 insert into balance
-values (6, 6000, 5, 306);
+values (6, 6000, 5);
 -- для студий
 insert into balance
-values (701, 30000, 4, 501);
+values (7, 30000, 4);
 insert into balance
-values (702, 15000, 4, 502);
+values (8, 15000, 4);
 insert into balance
-values (703, 77000, 4, 503);
+values (9, 77000, 4);
 insert into balance
-values (704, 33000, 4, 504);
+values (10, 33000, 4);
 
 -- студии(менеджер) к ним
 insert into studio
-values (501, 'БОГАТЫРЬ С НЕВЫ', 'ФИТНЕС КЛУБ', 4, 1, 701);
+values (1, 'БОГАТЫРЬ С НЕВЫ', 'ФИТНЕС КЛУБ', 4, 1, 7);
 insert into studio
-values (502, 'ЙОГА ДОМ', 'ДОМ ЙОГИ', 4, 2, 702);
+values (2, 'ЙОГА ДОМ', 'ДОМ ЙОГИ', 4, 2, 8);
 insert into studio
-values (503, 'УДАРНАЯ РАКЕТКА', 'ЦЕНТР БОЛЬШОГО ТЕННИСА', 4, 3, 703);
+values (3, 'УДАРНАЯ РАКЕТКА', 'ЦЕНТР БОЛЬШОГО ТЕННИСА', 4, 3, 9);
 insert into studio
-values (504, 'СИЛА&ЗДОРОВЬЕ', 'ФИТНЕС, ТРЕНАЖЕРНЫЙ ЦЕНТР', 4, 4, 704);
+values (4, 'СИЛА&ЗДОРОВЬЕ', 'ФИТНЕС, ТРЕНАЖЕРНЫЙ ЦЕНТР', 4, 4, 10);
 
 -- создали клиентуру(среди них есть админ и инструктор - одна таблица)
 insert into client
@@ -67,23 +67,23 @@ values (DEFAULT, 'zoe_tut', 'zoe_tutu@yandex.ru', '+79156447117', 'female', 2, 5
 
 -- создаем точки студий
 insert into pos
-values (DEFAULT, 'ADDRESS 1', '10:00-18:00', 501);
+values (DEFAULT, 'ADDRESS 1', '10:00-18:00', 1);
 insert into pos
-values (DEFAULT, 'ADDRESS 2', '14:00-18:00', 501);
+values (DEFAULT, 'ADDRESS 2', '14:00-18:00', 1);
 insert into pos
-values (DEFAULT, 'ADDRESS 3', '08:00-20:00', 502);
+values (DEFAULT, 'ADDRESS 3', '08:00-20:00', 2);
 insert into pos
-values (DEFAULT, 'kort 1', '06:00-22:00', 503);
+values (DEFAULT, 'kort 1', '06:00-22:00', 3);
 insert into pos
-values (DEFAULT, 'kort 2', '06:00-22:00', 503);
+values (DEFAULT, 'kort 2', '06:00-22:00', 3);
 insert into pos
-values (DEFAULT, 'kort 3', '06:00-22:00', 503);
+values (DEFAULT, 'kort 3', '06:00-22:00', 3);
 insert into pos
-values (DEFAULT, 'kort 4', '10:00-22:00', 503);
+values (DEFAULT, 'kort 4', '10:00-22:00', 3);
 insert into pos
-values (DEFAULT, 'porohovskaya 13', '08:00-22:00', 504);
+values (DEFAULT, 'porohovskaya 13', '08:00-22:00', 4);
 insert into pos
-values (DEFAULT, 'nab. fontanki 11', '08:00-22:00', 504);
+values (DEFAULT, 'nab. fontanki 11', '08:00-22:00', 4);
 
 -- создаем занятия в студиях
 insert into class

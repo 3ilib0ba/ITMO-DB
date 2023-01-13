@@ -25,14 +25,15 @@ public class Ping {
     @Column(name = "time_of_ping")
     private Time time_of_ping;
 
-
-
-
-
     public Ping(Time time) {
         this.time_of_ping = time;
     }
 
     public Ping() {
+    }
+
+    @Override
+    public String toString() {
+        return "id: " + id + ", time of it: " + time_of_ping.toString();
     }
 }

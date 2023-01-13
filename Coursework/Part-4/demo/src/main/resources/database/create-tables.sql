@@ -10,8 +10,7 @@ create table if not exists balance
     value     float
         CHECK (value >= 0),
     role_id   int not null
-        references role (id),
-    entity_id int unique -- целостность отводится на программиста нужно чтобы здесь был id студии, клиента или инструктора
+        references role (id)
 );
 
 create table if not exists client

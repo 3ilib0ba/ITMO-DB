@@ -1,7 +1,6 @@
 package com.example.demo.config;
 
 public enum RoleConfig {
-
     UNAUTHORIZED("UNAUTHORIZED"),
 
     ROLE_USER("USER"),

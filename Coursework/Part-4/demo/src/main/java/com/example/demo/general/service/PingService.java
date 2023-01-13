@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
+import java.util.List;
 
 @Service
 public class PingService {
@@ -15,9 +16,11 @@ public class PingService {
 
     public void addNewPingFromNow() {
         Ping ping_current = new Ping(new Time(System.currentTimeMillis()));
-
         pingRepository.save(ping_current);
+    }
 
+    public List<Ping> getAllPings() {
+        return pingRepository.findAll();
     }
 
 }

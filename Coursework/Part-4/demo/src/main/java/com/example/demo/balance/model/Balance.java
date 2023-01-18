@@ -50,4 +50,12 @@ public class Balance {
     public void setId(long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Balance{" +
+                "value=" + value +
+                ", role=" + role +
+                '}';
+    }
 }

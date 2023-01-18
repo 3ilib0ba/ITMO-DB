@@ -103,13 +103,13 @@ values (DEFAULT, 'FREE TRAINEE', '2022-12-20', '08:00', '17:00', 1000, 8);
 
 -- создаём инструкторов
 insert into instructor
-values (306, 'ANTON', 'instructor_anton@mail.ru', '+79112273399', 'male');
+values (1, 'ANTON', 'instructor_anton@mail.ru', '+79112273399', 'male');
 
 -- соединяем инструкторов и занятия
 insert into instructor_class_relation
-values (DEFAULT, 306, 1);
+values (DEFAULT, 1, 1);
 insert into instructor_class_relation
-values (DEFAULT, 306, 2);
+values (DEFAULT, 1, 2);
 
 -- создаём брони на занятия клиентами
 insert into booking
@@ -157,9 +157,9 @@ values (DEFAULT, 'БАНЯ', 'ЕСТЬ');
 
 -- соединяем их с оставшимися таблицами
 insert into instructor_classifier_relation
-values (DEFAULT, 306, 4);
+values (DEFAULT, 1, 4);
 insert into instructor_classifier_relation
-values (DEFAULT, 306, 6);
+values (DEFAULT, 1, 6);
 
 insert into pos_classifier_relation
 values (DEFAULT, 3, 1);

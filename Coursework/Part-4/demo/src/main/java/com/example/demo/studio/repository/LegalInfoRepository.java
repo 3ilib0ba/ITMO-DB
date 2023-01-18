@@ -6,4 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LegalInfoRepository extends JpaRepository<LegalInfo, Long> {
+
+    public LegalInfo getLegalInfoByMail(String mail);
+
+    public LegalInfo getLegalInfoByTIN(String tin);
+
 }

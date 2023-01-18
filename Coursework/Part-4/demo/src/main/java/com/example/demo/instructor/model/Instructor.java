@@ -3,13 +3,10 @@ package com.example.demo.instructor.model;
 import com.example.demo.classes.model.Classes;
 import com.example.demo.classifiers.model.Classifier;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "instructor")
 public class Instructor {
@@ -45,4 +42,85 @@ public class Instructor {
             inverseJoinColumns = { @JoinColumn(name = "classifier_id") }
     )
     List<Classifier> classifiers;
+
+    public Instructor() {
+    }
+
+    public Instructor(long id, String name, String mail, String phone, String gender) {
+        this.id = id;
+        this.name = name;
+        this.mail = mail;
+        this.phone = phone;
+        this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", mail='" + mail + '\'' +
+                ", phone='" + phone + '\'' +
+                ", gender='" + gender + '\'' +
+                ", classes=" + classes +
+                ", classifiers=" + classifiers +
+                '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public List<Classes> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<Classes> classes) {
+        this.classes = classes;
+    }
+
+    public List<Classifier> getClassifiers() {
+        return classifiers;
+    }
+
+    public void setClassifiers(List<Classifier> classifiers) {
+        this.classifiers = classifiers;
+    }
+
 }

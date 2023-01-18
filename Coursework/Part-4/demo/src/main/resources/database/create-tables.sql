@@ -17,8 +17,8 @@ create table if not exists client
 (
     id         serial primary key,
     name       varchar(50) not null,
-    mail       varchar(50) not null,
-    phone      varchar(20) not null,
+    mail       varchar(50) not null unique,
+    phone      varchar(20) not null unique,
     gender     varchar(20) not null,
     role_id    int         not null
         references role (id),
@@ -31,7 +31,7 @@ create table if not exists legal_info
     id               serial primary key,
     full_description text   not null,
     contact_phone    varchar(20),
-    mail             varchar(50) not null,
+    mail             varchar(50) not null unique,
     TIN              varchar(20) not null unique
 );
 
@@ -83,8 +83,8 @@ create table if not exists instructor
 (
     id     serial      not null primary key,
     name   varchar(50) not null,
-    mail   varchar(50) not null,
-    phone  varchar(20) not null,
+    mail   varchar(50) not null unique,
+    phone  varchar(20) not null unique,
     gender varchar(20) not null
 );
 
@@ -100,7 +100,7 @@ create table if not exists instructor_class_relation
 create table if not exists classifier
 (
     id               serial      not null primary key,
-    classifier_value varchar(32) not null,
+    classifier_value varchar(50) not null,
     classifier_name  text        not null
 );
 
